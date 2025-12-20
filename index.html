@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Public Note - Herkese açık şifreli not defteri. Başlıkla erişin, başlıkla şifreleyin.">
+    <title>publicnote</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+</head>
+
+<body>
+    <!-- Başlık Giriş Ekranı -->
+    <div id="title-screen" class="screen active">
+        <h1>publicnote</h1>
+        <p class="subtitle">Şifreli notlarınız, tek bir başlıkla güvende</p>
+        <div class="input-container">
+            <input type="text" id="title-input" placeholder="Başlık girin..." autocomplete="off">
+            <button id="go-btn">Git</button>
+        </div>
+        <p class="hint">Başlığınız hem adresiniz hem de anahtarınız. Unutmayın!</p>
+    </div>
+
+    <!-- Not Yazma Ekranı -->
+    <div id="note-screen" class="screen">
+        <header>
+            <span id="current-title">publicnote</span>
+            <div class="header-right">
+                <span id="save-indicator" class="hidden">✓</span>
+                <button id="back-btn">← Geri</button>
+            </div>
+        </header>
+        <textarea id="note-content" placeholder="Notunuzu yazın..."></textarea>
+        <footer>
+            <span class="info">Notunuz askeri düzeyde AES-256 şifrelemesiyle korunuyor. Başlığınızı sakın
+                unutmayın!</span>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
