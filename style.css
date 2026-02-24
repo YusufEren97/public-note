@@ -38,7 +38,7 @@ body {
 }
 
 .subtitle {
-    color: #666;
+    color: #999;
     margin-bottom: 40px;
     font-size: 0.9rem;
 }
@@ -68,7 +68,7 @@ body {
 }
 
 #title-input::placeholder {
-    color: #555;
+    color: #777;
 }
 
 #go-btn {
@@ -91,7 +91,7 @@ body {
 
 .hint {
     margin-top: 30px;
-    color: #444;
+    color: #888;
     font-size: 0.8rem;
     text-align: center;
     max-width: 400px;
@@ -114,6 +114,23 @@ header {
 #current-title {
     font-size: 1.2rem;
     color: #4ecdc4;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    font-family: inherit;
+    padding: 4px 0;
+    border-radius: 0;
+    outline: none;
+    transition: border-color 0.3s;
+    min-width: 0;
+    max-width: none;
+    flex: 1;
+    cursor: pointer;
+}
+
+#current-title:focus {
+    border-bottom-color: #4ecdc4;
+    cursor: text;
 }
 
 .header-right {
@@ -145,20 +162,21 @@ header {
 }
 
 #back-btn {
-    padding: 8px 16px;
-    font-size: 0.9rem;
+    padding: 10px 20px;
+    font-size: 1rem;
     font-family: inherit;
-    background: transparent;
-    color: #888;
-    border: 1px solid #333;
+    background: #1a1a1a;
+    color: #ccc;
+    border: 1px solid #444;
     border-radius: 4px;
     cursor: pointer;
-    transition: color 0.3s, border-color 0.3s;
+    transition: all 0.3s;
 }
 
 #back-btn:hover {
-    color: #e0e0e0;
-    border-color: #555;
+    color: #fff;
+    border-color: #4ecdc4;
+    background: #222;
 }
 
 #note-content {
@@ -175,7 +193,7 @@ header {
 }
 
 #note-content::placeholder {
-    color: #444;
+    color: #666;
 }
 
 footer {
@@ -186,7 +204,7 @@ footer {
 
 .info {
     font-size: 0.75rem;
-    color: #444;
+    color: #777;
 }
 
 /* Responsive */

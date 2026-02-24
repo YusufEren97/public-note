@@ -59,7 +59,7 @@ async function loadNote(title) {
 
 // Not kaydet
 async function saveNote(title, content) {
-    if (isSaving) return; // Çift kaydetmeyi önle
+    if (isSaving) return;
 
     const noteId = generateHash(title);
 
@@ -115,9 +115,28 @@ function goToNote() {
         return;
     }
 
-    currentTitle.textContent = title;
+    currentTitle.value = title;
     showScreen(noteScreen);
     loadNote(title);
+    noteContent.focus();
+}
+
+// Başlık değişince nota geç
+async function switchNote(newTitle) {
+    if (!newTitle || newTitle === currentTitleKey) return;
+
+    // Önce mevcut notu kaydet
+    if (saveTimeout) {
+        clearTimeout(saveTimeout);
+        saveTimeout = null;
+    }
+    if (currentTitleKey && noteContent.value) {
+        await saveNote(currentTitleKey, noteContent.value);
+    }
+
+    // Yeni nota geç
+    currentTitle.value = newTitle;
+    loadNote(newTitle);
     noteContent.focus();
 }
 
@@ -147,7 +166,7 @@ function handleNoteChange() {
     }
 
     saveTimeout = setTimeout(() => {
-        const title = currentTitle.textContent;
+        const title = currentTitle.value;
         const content = noteContent.value;
         saveNote(title, content);
     }, 1000);
@@ -165,6 +184,30 @@ titleInput.addEventListener('keypress', (e) => {
 backBtn.addEventListener('click', goBack);
 
 noteContent.addEventListener('input', handleNoteChange);
+
+// Başlık inputunda Enter → nota geç
+currentTitle.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        const newTitle = currentTitle.value.trim();
+        if (newTitle) {
+            switchNote(newTitle);
+            currentTitle.blur();
+        } else {
+            currentTitle.value = currentTitleKey;
+        }
+    }
+});
+
+// Başlık inputu focustan çıkınca → nota geç
+currentTitle.addEventListener('blur', () => {
+    const newTitle = currentTitle.value.trim();
+    if (newTitle && newTitle !== currentTitleKey) {
+        switchNote(newTitle);
+    } else if (!newTitle) {
+        currentTitle.value = currentTitleKey;
+    }
+});
 
 // Sayfa yüklendiğinde input'a odaklan
 titleInput.focus();
