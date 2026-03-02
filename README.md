@@ -2,6 +2,10 @@
 
 publicnote.com'u hatırlayanlar bilir - basit, şifreli, herkese açık not defteri. Kapandığı için kendim yazdım.
 
+# Demo
+
+yusuferenseyrek.com.tr
+
 ## Kullanım
 
 Bir başlık gir, not yaz, bu kadar. Başlık hem erişim hem şifreleme anahtarı. Aynı başlığı bilen herkes aynı notu görür.
