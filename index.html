@@ -7,12 +7,12 @@
     <meta name="description"
         content="Public Note - Herkese açık şifreli not defteri. Başlıkla erişin, başlıkla şifreleyin.">
     <title>publicnote</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
 </head>
 
 <body>
-    <!-- Başlık Giriş Ekranı -->
     <div id="title-screen" class="screen active">
         <h1>publicnote</h1>
         <p class="subtitle">Şifreli notlarınız, tek bir başlıkla güvende</p>
@@ -23,7 +23,6 @@
         <p class="hint">Başlığınız hem adresiniz hem de anahtarınız. Unutmayın!</p>
     </div>
 
-    <!-- Not Yazma Ekranı -->
     <div id="note-screen" class="screen">
         <header>
             <input type="text" id="current-title" value="publicnote" autocomplete="off" spellcheck="false">
@@ -39,7 +38,7 @@
         </footer>
     </div>
 
-    <script src="app.js"></script>
+    <script src="assets/js/app.js"></script>
 </body>
 
 </html>
