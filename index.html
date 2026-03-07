@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Public Note - Herkese açık şifreli not defteri. Başlıkla erişin, başlıkla şifreleyin.">
+        content="Public Note - Zero-knowledge encrypted notepad. Access and encrypt with just a title.">
     <title>publicnote</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
@@ -14,13 +14,15 @@
 
 <body>
     <div id="title-screen" class="screen active">
+        <button id="lang-toggle" class="lang-toggle">TR</button>
         <h1>publicnote</h1>
-        <p class="subtitle">Şifreli notlarınız, tek bir başlıkla güvende</p>
+        <p class="subtitle" data-i18n="subtitle">Your encrypted notes, secured with a single title</p>
         <div class="input-container">
-            <input type="text" id="title-input" placeholder="Başlık girin..." autocomplete="off">
-            <button id="go-btn">Git</button>
+            <input type="text" id="title-input" data-i18n-placeholder="placeholder" placeholder="Enter a title..."
+                autocomplete="off">
+            <button id="go-btn" data-i18n="goBtn">Go</button>
         </div>
-        <p class="hint">Başlığınız hem adresiniz hem de anahtarınız. Unutmayın!</p>
+        <p class="hint" data-i18n="hint">Your title is both your address and your key. Don't forget it!</p>
     </div>
 
     <div id="note-screen" class="screen">
@@ -28,13 +30,13 @@
             <input type="text" id="current-title" value="publicnote" autocomplete="off" spellcheck="false">
             <div class="header-right">
                 <span id="save-indicator" class="hidden">✓</span>
-                <button id="back-btn">← Geri</button>
+                <button id="back-btn" data-i18n="backBtn">← Back</button>
             </div>
         </header>
-        <textarea id="note-content" placeholder="Notunuzu yazın..."></textarea>
+        <textarea id="note-content" data-i18n-placeholder="notePlaceholder" placeholder="Write your note..."></textarea>
         <footer>
-            <span class="info">Notunuz askeri düzeyde AES-256 şifrelemesiyle korunuyor. Başlığınızı sakın
-                unutmayın!</span>
+            <span class="info" data-i18n="footerInfo">Your note is protected with military-grade AES-256 encryption.
+                Don't ever forget your title!</span>
         </footer>
     </div>
 
