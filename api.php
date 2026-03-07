@@ -2,8 +2,8 @@
 /**
  * Public Note API
  * 
- * GET ?id=<hash> - Şifreli notu getir
- * POST { id, content } - Şifreli notu kaydet
+ * GET ?id=<hash> - Retrieve encrypted note
+ * POST { id, content } - Save encrypted note
  */
 
 header('Content-Type: application/json; charset=utf-8');
@@ -31,12 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $id = $_GET['id'] ?? '';
 
     if (empty($id)) {
-        echo json_encode(['success' => false, 'error' => 'ID gerekli']);
+        echo json_encode(['success' => false, 'error' => 'ID required']);
         exit;
     }
 
     if (!isValidHash($id)) {
-        echo json_encode(['success' => false, 'error' => 'Geçersiz ID formatı']);
+        echo json_encode(['success' => false, 'error' => 'Invalid ID format']);
         exit;
     }
 
@@ -65,12 +65,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $content = $input['content'] ?? '';
 
     if (empty($id)) {
-        echo json_encode(['success' => false, 'error' => 'ID gerekli']);
+        echo json_encode(['success' => false, 'error' => 'ID required']);
         exit;
     }
 
     if (!isValidHash($id)) {
-        echo json_encode(['success' => false, 'error' => 'Geçersiz ID formatı']);
+        echo json_encode(['success' => false, 'error' => 'Invalid ID format']);
         exit;
     }
 
@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['success' => true]);
     }
     else {
-        echo json_encode(['success' => false, 'error' => 'Kayıt başarısız']);
+        echo json_encode(['success' => false, 'error' => 'Save failed']);
     }
     exit;
 }
