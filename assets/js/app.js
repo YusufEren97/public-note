@@ -1,3 +1,49 @@
+const translations = {
+    tr: {
+        subtitle: 'Şifreli notlarınız, tek bir başlıkla güvende',
+        placeholder: 'Başlık girin...',
+        goBtn: 'Git',
+        hint: 'Başlığınız hem adresiniz hem de anahtarınız. Unutmayın!',
+        backBtn: '← Geri',
+        notePlaceholder: 'Notunuzu yazın...',
+        footerInfo: 'Notunuz askeri düzeyde AES-256 şifrelemesiyle korunuyor. Başlığınızı sakın unutmayın!'
+    },
+    en: {
+        subtitle: 'Your encrypted notes, secured with a single title',
+        placeholder: 'Enter a title...',
+        goBtn: 'Go',
+        hint: 'Your title is both your address and your key. Don\'t forget it!',
+        backBtn: '← Back',
+        notePlaceholder: 'Write your note...',
+        footerInfo: 'Your note is protected with military-grade AES-256 encryption. Don\'t ever forget your title!'
+    }
+};
+
+let currentLang = localStorage.getItem('lang') || 'en';
+
+function applyLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('lang', lang);
+
+    const langToggle = document.getElementById('lang-toggle');
+    langToggle.textContent = lang === 'tr' ? 'EN' : 'TR';
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+            el.textContent = translations[lang][key];
+        }
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (translations[lang][key]) {
+            el.placeholder = translations[lang][key];
+        }
+    });
+}
+
 const titleScreen = document.getElementById('title-screen');
 const noteScreen = document.getElementById('note-screen');
 const titleInput = document.getElementById('title-input');
@@ -45,7 +91,7 @@ async function loadNote(title) {
             noteContent.value = '';
         }
     } catch (e) {
-        console.error('Not yüklenirken hata:', e);
+        console.error('Error loading note:', e);
         noteContent.value = '';
     }
 }
@@ -76,7 +122,7 @@ async function saveNote(title, content) {
             showSaveIndicator();
         }
     } catch (e) {
-        console.error('Not kaydedilirken hata:', e);
+        console.error('Error saving note:', e);
     } finally {
         isSaving = false;
     }
@@ -124,7 +170,7 @@ function handleNoteChange() {
 async function switchNote(newTitle) {
     if (!newTitle || newTitle === currentTitleKey) return;
 
-    // Önce mevcut notu kaydet
+    // Save current note first
     if (saveTimeout) {
         clearTimeout(saveTimeout);
         saveTimeout = null;
@@ -139,7 +185,7 @@ async function switchNote(newTitle) {
 }
 
 async function goBack() {
-    // Bekleyen kayıt varsa hemen kaydet
+    // Save pending changes immediately
     if (saveTimeout) {
         clearTimeout(saveTimeout);
         saveTimeout = null;
@@ -191,3 +237,9 @@ currentTitle.addEventListener('blur', () => {
 });
 
 titleInput.focus();
+
+document.getElementById('lang-toggle').addEventListener('click', () => {
+    applyLanguage(currentLang === 'tr' ? 'en' : 'tr');
+});
+
+applyLanguage(currentLang);
