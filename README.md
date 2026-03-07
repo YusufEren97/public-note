@@ -92,6 +92,19 @@ MIT
 
 ---
 
+<div align="center">
+
+## Author
+
+| <img src="https://github.com/YusufEren97.png" width="120" style="border-radius:50%"/> |
+|:---:|
+| **Yusuf Eren Seyrek** |
+| [![GitHub](https://img.shields.io/badge/GitHub-YusufEren97-black?logo=github)](https://github.com/YusufEren97) |
+
+</div>
+
+---
+
 <a id="turkce"></a>
 
 ## Genel Bakış
