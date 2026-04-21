@@ -180,6 +180,36 @@ header {
     background: #222;
 }
 
+#refresh-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    font-family: inherit;
+    background: #1a1a1a;
+    color: #ccc;
+    border: 1px solid #444;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#refresh-btn:hover {
+    color: #fff;
+    border-color: #4ecdc4;
+    background: #222;
+}
+
+#refresh-btn.spinning {
+    animation: spin 0.5s linear;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
 #note-content {
     flex: 1;
     padding: 25px;

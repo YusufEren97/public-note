@@ -5,6 +5,7 @@ const translations = {
         goBtn: 'Git',
         hint: 'Başlığınız hem adresiniz hem de anahtarınız. Unutmayın!',
         backBtn: '← Geri',
+        refreshBtnTitle: 'Yenile',
         notePlaceholder: 'Notunuzu yazın...',
         footerInfo: 'Notunuz askeri düzeyde AES-256 şifrelemesiyle korunuyor. Başlığınızı sakın unutmayın!'
     },
@@ -14,6 +15,7 @@ const translations = {
         goBtn: 'Go',
         hint: 'Your title is both your address and your key. Don\'t forget it!',
         backBtn: '← Back',
+        refreshBtnTitle: 'Refresh',
         notePlaceholder: 'Write your note...',
         footerInfo: 'Your note is protected with military-grade AES-256 encryption. Don\'t ever forget your title!'
     }
@@ -42,6 +44,13 @@ function applyLanguage(lang) {
             el.placeholder = translations[lang][key];
         }
     });
+
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        if (translations[lang][key]) {
+            el.title = translations[lang][key];
+        }
+    });
 }
 
 const titleScreen = document.getElementById('title-screen');
@@ -49,6 +58,7 @@ const noteScreen = document.getElementById('note-screen');
 const titleInput = document.getElementById('title-input');
 const goBtn = document.getElementById('go-btn');
 const backBtn = document.getElementById('back-btn');
+const refreshBtn = document.getElementById('refresh-btn');
 const noteContent = document.getElementById('note-content');
 const currentTitle = document.getElementById('current-title');
 const saveIndicator = document.getElementById('save-indicator');
@@ -202,6 +212,23 @@ async function goBack() {
     titleInput.focus();
 }
 
+async function refreshNote() {
+    if (!currentTitleKey) return;
+
+    if (saveTimeout) {
+        clearTimeout(saveTimeout);
+        saveTimeout = null;
+    }
+
+    refreshBtn.classList.add('spinning');
+
+    await loadNote(currentTitleKey);
+
+    setTimeout(() => {
+        refreshBtn.classList.remove('spinning');
+    }, 500);
+}
+
 goBtn.addEventListener('click', goToNote);
 
 titleInput.addEventListener('keypress', (e) => {
@@ -211,6 +238,7 @@ titleInput.addEventListener('keypress', (e) => {
 });
 
 backBtn.addEventListener('click', goBack);
+refreshBtn.addEventListener('click', refreshNote);
 
 noteContent.addEventListener('input', handleNoteChange);
 
