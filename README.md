@@ -12,7 +12,7 @@ A simple, encrypted, public notepad. Inspired by the original publicnote.com —
 
 Public Note is a minimalist web application that lets anyone create and access encrypted notes using only a title. The title serves as both the access key and the encryption passphrase — no accounts, no passwords, no registration.
 
-**Live Demo:** [yusuferenseyrek.com.tr](https://yusuferenseyrek.com.tr)
+**Live Demo:** [yusuferen97.me](https://yusuferen97.me)
 
 ## How It Works
 
